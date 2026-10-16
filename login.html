@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>Fraudexa - Login</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top, #102010 0%, #050505 45%, #000000 100%);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .login-page {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 430px;
+      background: rgba(12, 12, 12, 0.96);
+      border: 1px solid rgba(0, 255, 55, 0.25);
+      border-radius: 24px;
+      padding: 38px 30px;
+      box-shadow:
+        0 0 35px rgba(0, 255, 55, 0.08),
+        0 20px 70px rgba(0, 0, 0, 0.6);
+    }
+
+    .brand {
+      text-align: center;
+      color: #00ff3c;
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .welcome {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #a5a5a5;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      color: #dddddd;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    .input {
+      width: 100%;
+      height: 52px;
+      padding: 0 15px;
+      background: #101010;
+      color: #ffffff;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      outline: none;
+      font-size: 15px;
+      transition: 0.2s;
+    }
+
+    .input:focus {
+      border-color: #00ff3c;
+      box-shadow: 0 0 0 3px rgba(0, 255, 60, 0.08);
+    }
+
+    .password-input {
+      padding-right: 75px;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 13px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: none;
+      background: transparent;
+      color: #00ff3c;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .options {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 8px 0 24px;
+    }
+
+    .remember {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: #a9a9a9;
+      font-size: 13px;
+    }
+
+    .remember input {
+      accent-color: #00ff3c;
+    }
+
+    .forgot {
+      color: #00ff3c;
+      text-decoration: none;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .forgot:hover {
+      text-decoration: underline;
+    }
+
+    .sign-in-btn {
+      width: 100%;
+      height: 52px;
+      border: none;
+      border-radius: 12px;
+      background: #00ff3c;
+      color: #000000;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .sign-in-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 22px rgba(0, 255, 60, 0.25);
+    }
+
+    .sign-in-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .message {
+      display: none;
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 13px;
+      line-height: 1.4;
+      text-align: center;
+    }
+
+    .message.error {
+      display: block;
+      color: #ff7070;
+      background: rgba(255, 0, 0, 0.08);
+      border: 1px solid rgba(255, 0, 0, 0.18);
+    }
+
+    .message.success {
+      display: block;
+      color: #00ff3c;
+      background: rgba(0, 255, 60, 0.07);
+      border: 1px solid rgba(0, 255, 60, 0.18);
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 27px 0;
+      color: #555555;
+      font-size: 12px;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #252525;
+    }
+
+    .create-account {
+      text-align: center;
+      color: #a5a5a5;
+      font-size: 14px;
+    }
+
+    .create-account a {
+      color: #00ff3c;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .create-account a:hover {
+      text-decoration: underline;
+    }
+
+    .security-note {
+      margin-top: 24px;
+      text-align: center;
+      color: #666666;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 480px) {
+      .login-card {
+        padding: 30px 20px;
+        border-radius: 20px;
+      }
+
+      .brand {
+        font-size: 28px;
+      }
+
+      .welcome {
+        font-size: 25px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="login-page">
+
+    <div class="login-card">
+
+      <div class="brand">FRAUDEXA</div>
+
+      <div class="welcome">Welcome Back.</div>
+
+      <div class="subtitle">
+        Sign in to protect yourself from online fraud.
+      </div>
+
+      <form id="loginForm">
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+
+          <input
+            class="input"
+            id="email"
+            type="email"
+            placeholder="Enter your email"
+            autocomplete="email"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+
+          <label for="password">Password</label>
+
+          <div class="input-wrap">
+
+            <input
+              class="input password-input"
+              id="password"
+              type="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              required
+            >
+
+            <button
+              type="button"
+              class="toggle-password"
+              id="togglePassword"
+            >
+              SHOW
+            </button>
+
+          </div>
+
+        </div>
+
+        <div class="options">
+
+          <label class="remember">
+            <input
+              type="checkbox"
+              id="rememberMe"
+            >
+            Remember me
+          </label>
+
+          <a
+            href="#"
+            class="forgot"
+            id="forgotPassword"
+          >
+            Forgot Password?
+          </a>
+
+        </div>
+
+        <button
+          type="submit"
+          class="sign-in-btn"
+          id="signInBtn"
+        >
+          Sign In
+        </button>
+
+        <div
+          id="message"
+          class="message"
+        ></div>
+
+      </form>
+
+      <div class="divider">
+        OR
+      </div>
+
+      <div class="create-account">
+        Don't have an account?
+        <a href="register.html">
+          Create Account
+        </a>
+      </div>
+
+      <div class="security-note">
+        Your authentication is handled securely by Firebase Authentication.
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Firebase Authentication -->
+
+  <script type="module">
+  import { initializeApp }
+    from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+
+  import {
+    getAuth,
+    signInWithEmailAndPassword
+  } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBNSTDIceQCupazPl4ZbzR4OFN64RVQgTY",
+    authDomain: "fraudexa-15d6a.firebaseapp.com",
+    projectId: "fraudexa-15d6a",
+    storageBucket: "fraudexa-15d6a.firebasestorage.app",
+    messagingSenderId: "891490763035",
+    appId: "1:891490763035:web:15c654ed5946910ecc93be",
+    measurementId: "G-X3K8MDGV7W"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  const loginForm = document.querySelector("form");
+
+  loginForm.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const emailInput = loginForm.querySelector('input[type="email"]');
+    const passwordInput = loginForm.querySelector('input[type="password"]');
+
+    const email = emailInput.value.trim();
+    const password = passwordInput.value;
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      console.log("Login successful:", userCredential.user.email);
+
+      window.location.href = "index.html";
+
+    } catch (error) {
+      console.error(error);
+
+      let message = "Unable to sign in. Please try again.";
+
+      if (error.code === "auth/invalid-credential") {
+        message = "Invalid email or password.";
+      } else if (error.code === "auth/user-not-found") {
+        message = "No account found with this email.";
+      } else if (error.code === "auth/wrong-password") {
+        message = "Incorrect password.";
+      } else if (error.code === "auth/too-many-requests") {
+        message = "Too many attempts. Please try again later.";
+      }
+
+      alert(message);
+    }
+  });
+</script>
+
+</body>
+</html>

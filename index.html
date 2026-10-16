@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FRAUDEXA — Know Before You Trust</title>
+
+    <meta
+        name="description"
+        content="Fraudexa helps you identify suspicious messages, links and online offers before you click, pay or share personal information."
+    >
+
+    <meta name="theme-color" content="#06100e">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            color-scheme: dark;
+            --background: #06100e;
+            --panel: #0d1c19;
+            --border: #29463f;
+            --green: #18d89b;
+            --bright-green: #18d825;
+            --muted: #aab8b4;
+            --red: #ff6b6b;
+            --yellow: #ffc857;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--background);
+            color: #ffffff;
+        }
+
+        button,
+        input {
+            font: inherit;
+        }
+
+        button {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        header {
+            padding: 24px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--bright-green);
+            letter-spacing: 1px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s ease;
+        }
+
+        nav a:hover {
+            color: var(--green);
+        }
+
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 45px 20px 70px;
+        }
+
+        .hero-content {
+            width: 100%;
+            max-width: 850px;
+        }
+
+        .badge {
+            display: inline-block;
+            color: var(--green);
+            background: rgba(24, 216, 155, 0.08);
+            border: 1px solid rgba(24, 216, 155, 0.25);
+            padding: 10px 18px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 28px;
+        }
+
+        h1 {
+            font-size: clamp(48px, 8vw, 86px);
+            line-height: 1.05;
+            margin-bottom: 28px;
+            letter-spacing: -2px;
+        }
+
+        h1 span {
+            color: var(--green);
+        }
+
+        .subtitle {
+            max-width: 680px;
+            margin: 0 auto 35px;
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--muted);
+        }
+
+        .checker {
+            max-width: 760px;
+            margin: auto;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+        }
+
+        .checker input[type="text"] {
+            flex: 1;
+            width: 100%;
+            min-width: 0;
+            padding: 18px 14px;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: #ffffff;
+            font-size: 15px;
+        }
+
+        .checker input[type="text"]::placeholder {
+            color: #8b9d97;
+        }
+
+        .checker input[type="file"] {
+            width: 175px;
+            min-width: 0;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .checker input[type="file"]::file-selector-button {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px;
+            margin-right: 6px;
+            background: #142b24;
+            color: #ffffff;
+            cursor: pointer;
+        }
+
+        .checker button {
+            flex-shrink: 0;
+            min-height: 52px;
+            border: none;
+            border-radius: 13px;
+            padding: 0 24px;
+            background: var(--bright-green);
+            color: #03100c;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .checker button:hover:not(:disabled) {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .checker button:disabled {
+            opacity: 0.6;
+            cursor: wait;
+        }
+
+        .helper-text {
+            margin-top: 14px;
+            color: #8b9d97;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        #result {
+            display: none;
+            max-width: 760px;
+            margin: 24px auto 0;
+            padding: 24px;
+            border-radius: 16px;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            text-align: left;
+            line-height: 1.7;
+            overflow-wrap: anywhere;
+        }
+
+        #result h2 {
+            font-size: 21px;
+            margin-bottom: 14px;
+            color: #ffffff;
+        }
+
+        #result .risk-label {
+            font-weight: 800;
+            margin-bottom: 14px;
+        }
+
+        #result .result-section {
+            margin-top: 16px;
+        }
+
+        #result .result-section h3 {
+            color: var(--green);
+            font-size: 15px;
+            margin-bottom: 7px;
+        }
+
+        #result .result-body {
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            color: #dce6e2;
+            font-size: 14px;
+        }
+
+        .risk-high {
+            border-color: rgba(255, 107, 107, 0.65) !important;
+        }
+
+        .risk-high .risk-label {
+            color: var(--red);
+        }
+
+        .risk-suspicious {
+            border-color: rgba(255, 200, 87, 0.65) !important;
+        }
+
+        .risk-suspicious .risk-label {
+            color: var(--yellow);
+        }
+
+        .risk-low {
+            border-color: rgba(24, 216, 155, 0.5) !important;
+        }
+
+        .risk-low .risk-label {
+            color: var(--green);
+        }
+
+        .risk-error {
+            border-color: rgba(255, 107, 107, 0.65) !important;
+        }
+
+        .risk-error .risk-label {
+            color: var(--red);
+        }
+
+        .safety-notice {
+            margin: 22px auto 0;
+            max-width: 700px;
+            color: #81938d;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        footer {
+            padding: 25px 20px;
+            text-align: center;
+            color: #81938d;
+            font-size: 12px;
+            border-top: 1px solid rgba(41, 70, 63, 0.5);
+        }
+
+        @media (max-width: 760px) {
+            header {
+                padding: 20px;
+            }
+
+            .logo {
+                font-size: 24px;
+            }
+
+            nav {
+                gap: 12px;
+            }
+
+            nav a {
+                font-size: 12px;
+            }
+
+            .checker {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .checker input[type="text"] {
+                width: 100%;
+            }
+
+            .checker input[type="file"] {
+                width: 100%;
+                padding: 10px;
+            }
+
+            .checker button {
+                width: 100%;
+                min-height: 54px;
+            }
+
+            .hero {
+                min-height: auto;
+                padding-top: 55px;
+            }
+
+            h1 {
+                font-size: clamp(45px, 12vw, 65px);
+                letter-spacing: -1px;
+            }
+
+            .subtitle {
+                font-size: 16px;
+            }
+
+            #result {
+                padding: 18px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            nav {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .badge {
+                font-size: 11px;
+                padding: 9px 12px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">FRAUDEXA</div>
+
+    <nav aria-label="Main navigation">
+        <a href="#home">Home</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#safety">Safety</a>
+    </nav>
+</header>
+
+<main>
+    <section class="hero" id="home">
+        <div class="hero-content">
+
+            <div class="badge">
+                🛡️ PROTECT YOURSELF FROM ONLINE SCAMS
+            </div>
+
+            <h1>
+                Know Before<br>
+                You <span>Trust.</span>
+            </h1>
+
+            <p class="subtitle" id="how-it-works">
+                Check suspicious messages, links and online offers
+                before you click, pay or share your information.
+            </p>
+
+            <form class="checker" id="checkerForm">
+                <input
+                    id="checkInput"
+                    name="message"
+                    type="text"
+                    placeholder="Paste a suspicious message or link..."
+                    aria-label="Suspicious message or link"
+                    autocomplete="off"
+                    maxlength="20000"
+                >
+
+                <input
+                    id="imageInput"
+                    name="image"
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp,image/gif"
+                    aria-label="Upload a screenshot for analysis"
+                >
+
+                <button id="checkButton" type="submit">
+                    Check Now
+                </button>
+            </form>
+
+            <p class="helper-text">
+                Enter a message or upload a screenshot. You can also do both.
+                Maximum image size: 5 MB.
+            </p>
+
+            <section
+                id="result"
+                aria-live="polite"
+                aria-atomic="true"
+                aria-label="Fraudexa scan report"
+            ></section>
+
+            <p class="safety-notice" id="safety">
+                Important: Fraudexa provides an automated risk assessment,
+                not a guarantee. A LOW risk result does not mean a message
+                or website is safe.
+            </p>
+
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>FRAUDEXA — Know Before You Trust</p>
+    <p style="margin-top: 8px;">
+        Stay alert. Protect your information. Verify before you trust.
+    </p>
+</footer>
+
+<script>
+"use strict";
+
+const input = document.getElementById("checkInput");
+const imageInput = document.getElementById("imageInput");
+const button = document.getElementById("checkButton");
+const result = document.getElementById("result");
+const checkerForm = document.getElementById("checkerForm");
+
+/*
+ * Local development API.
+ *
+ * For a public deployment, replace this with your deployed HTTPS API URL.
+ * Do not put your OpenAI API key in this file.
+ */
+const API_BASE_URL = "http://localhost:3000";
+
+const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
+
+const ALLOWED_IMAGE_TYPES = [
+    "image/jpeg",
+    "image/png",
+    "image/webp",
+    "image/gif"
+];
+
+function setLoading(isLoading) {
+    button.disabled = isLoading;
+    button.textContent = isLoading ? "Analyzing..." : "Check Now";
+    input.disabled = isLoading;
+    imageInput.disabled = isLoading;
+}
+
+function showMessage(message, type = "error") {
+    result.replaceChildren();
+    result.style.display = "block";
+    result.className = type === "error"
+        ? "risk-error"
+        : "risk-suspicious";
+
+    const heading = document.createElement("h2");
+    heading.textContent = type === "error"
+        ? "⚠️ Unable to Complete Check"
+        : "🛡️ FRAUDEXA";
+
+    const paragraph = document.createElement("p");
+    paragraph.className = "result-body";
+    paragraph.textContent = message;
+
+    result.append(heading, paragraph);
+}
+
+function getRiskClass(text) {
+    const normalized = String(text || "").toUpperCase();
+
+    if (/\bHIGH\b/.test(normalized)) {
+        return "risk-high";
+    }
+
+    if (/\bSUSPICIOUS\b/.test(normalized)) {
+        return "risk-suspicious";
+    }
+
+    if (/\bLOW\b/.test(normalized)) {
+        return "risk-low";
+    }
+
+    return "risk-suspicious";
+}
+
+function showAIReport(analysis) {
+    const safeAnalysis = String(analysis || "").trim();
+
+    if (!safeAnalysis) {
+        showMessage(
+            "The analysis service returned an empty result. Please try again."
+        );
+        return;
+    }
+
+    result.replaceChildren();
+    result.style.display = "block";
+    result.className = getRiskClass(safeAnalysis);
+
+    const heading = document.createElement("h2");
+    heading.textContent = "🛡️ FRAUDEXA SCAN REPORT";
+
+    const riskLabel = document.createElement("p");
+    riskLabel.className = "risk-label";
+
+    const riskMatch = safeAnalysis.match(
+        /\b(HIGH|SUSPICIOUS|LOW)\b/i
+    );
+
+    riskLabel.textContent = riskMatch
+        ? "Risk Level: " + riskMatch[1].toUpperCase()
+        : "Risk Assessment";
+
+    const section = document.createElement("div");
+    section.className = "result-section";
+
+    const sectionHeading = document.createElement("h3");
+    sectionHeading.textContent = "Analysis and Safety Advice";
+
+    const body = document.createElement("p");
+    body.className = "result-body";
+    body.textContent = safeAnalysis;
+
+    section.append(sectionHeading, body);
+    result.append(heading, riskLabel, section);
+
+    const notice = document.createElement("p");
+    notice.className = "helper-text";
+    notice.textContent =
+        "This is an automated assessment. LOW risk does not guarantee safety.";
+
+    result.append(notice);
+}
+
+async function analyzeMessage(message, imageFile) {
+    const formData = new FormData();
+
+    formData.append("message", message);
+
+    if (imageFile) {
+        formData.append("image", imageFile);
+    }
+
+    /*
+     * Do not manually set Content-Type for FormData.
+     * The browser must add the multipart boundary itself.
+     */
+const response = await fetch(
+    API_BASE_URL + "/api/analyze-free",
+    {
+        method: "POST",
+        body: formData
+    }
+);
+    let data;
+
+    try {
+        data = await response.json();
+    } catch {
+        throw new Error(
+            "The API returned an invalid response. Please check the server."
+        );
+    }
+
+    if (!response.ok) {
+        throw new Error(
+            data && data.error
+                ? data.error
+                : "Analysis failed. Please try again."
+        );
+    }
+
+    if (typeof data.analysis === "string") {
+    return data.analysis;
+}
+
+if (data.risk) {
+    return `Risk Level: ${data.risk}
+
+Reasons:
+${Array.isArray(data.reasons) && data.reasons.length
+    ? data.reasons.map(reason => "• " + reason).join("\n")
+    : "No obvious warning signs detected by the basic checker."}
+
+Safety Warning:
+${data.warning || "LOW risk does not guarantee safety."}`;
+}
+
+throw new Error(
+    data.error || "The server response did not contain an analysis."
+);
+}
+
+checkerForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const message = input.value.trim();
+    const imageFile = imageInput.files && imageInput.files[0]
+        ? imageInput.files[0]
+        : null;
+
+    if (!message && !imageFile) {
+        showMessage(
+            "Please enter a suspicious message or link, or upload a screenshot."
+        );
+        input.focus();
+        return;
+    }
+
+    if (message.length > 20000) {
+        showMessage(
+            "Your message is too long. Please keep it under 20,000 characters."
+        );
+        return;
+    }
+
+    if (imageFile) {
+        if (!ALLOWED_IMAGE_TYPES.includes(imageFile.type)) {
+            showMessage(
+                "Unsupported image format. Please upload a JPEG, PNG, WEBP or GIF image."
+            );
+            return;
+        }
+
+        if (imageFile.size > MAX_IMAGE_SIZE) {
+            showMessage(
+                "The selected image is larger than 5 MB. Please choose a smaller image."
+            );
+            return;
+        }
+    }
+
+    setLoading(true);
+
+    result.style.display = "block";
+    result.className = "";
+    result.replaceChildren();
+
+    const loadingHeading = document.createElement("h2");
+    loadingHeading.textContent = "🔍 Analyzing...";
+
+    const loadingText = document.createElement("p");
+    loadingText.className = "result-body";
+    loadingText.textContent =
+        "Fraudexa is checking the submitted content. Please wait.";
+
+    result.append(loadingHeading, loadingText);
+
+    try {
+        const analysis = await analyzeMessage(message, imageFile);
+        showAIReport(analysis);
+
+    } catch (error) {
+        console.error("Fraudexa analysis error:", error);
+
+        if (error instanceof TypeError) {
+            showMessage(
+                "Could not connect to the Fraudexa API. Make sure the backend is running at " +
+                API_BASE_URL +
+                " and that the page is allowed to access it."
+            );
+        } else {
+            showMessage(
+                error.message ||
+                "An unexpected error occurred. Please try again."
+            );
+        }
+
+    } finally {
+        setLoading(false);
+    }
+});
+</script>
+
+<script type="module">
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+
+import {
+    getAuth,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyBNSTDIceQCupazPl4ZbzR4OFN64RVQgTY",
+    authDomain: "fraudexa-15d6a.firebaseapp.com",
+    projectId: "fraudexa-15d6a",
+    storageBucket: "fraudexa-15d6a.firebasestorage.app",
+    messagingSenderId: "891490763035",
+    appId: "1:891490763035:web:15c654ed5946910ecc93be",
+    measurementId: "G-X3K8MDGV7W"
+};
+
+try {
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    onAuthStateChanged(auth, function (user) {
+        if (!user) {
+            window.location.replace("login.html");
+        }
+    });
+
+} catch (error) {
+    console.error("Fraudexa Firebase initialization error:", error);
+}
+</script>
+
+</body>
+</html>
