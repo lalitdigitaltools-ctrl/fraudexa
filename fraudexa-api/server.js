@@ -258,7 +258,7 @@ app.use((error, req, res, next) => {
     if (error instanceof multer.MulterError && error.code === "LIMIT_FILE_SIZE") {
         return res.status(413).json({
             success: false,
-            error: "Image is too large. Maximum allowed size is 5 MB."
+            error: "Image is too large. Maximum allowed size is 25 MB."
         });
     }
 
@@ -271,7 +271,17 @@ app.use((error, req, res, next) => {
 
     next();
 });
-
+// FRAUDEXA SCAM RADAR - Initial API
+app.get("/api/scam-radar", (req, res) => {
+  res.json({
+    success: true,
+    feature: "Fraudexa Scam Radar",
+    message: "Scam Radar API is active",
+    radiusKm: 50,
+    alerts: [],
+    note: "No verified local scam alerts are available yet."
+  });
+});
 app.listen(PORT, () => {
     console.log(`Fraudexa API running on http://localhost:${PORT}`);
 });

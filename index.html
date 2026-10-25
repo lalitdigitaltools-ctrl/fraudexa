@@ -370,6 +370,225 @@
                 transition: none !important;
             }
         }
+        /* FRAUDEXA - Premium Scam Rescue UI */
+#scamRescueButton {
+    width: 100%;
+    max-width: 560px;
+    padding: 16px 22px !important;
+    margin: 22px auto 14px;
+    display: block;
+    background: linear-gradient(135deg, #ef4444, #b91c1c) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
+    border-radius: 14px !important;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    box-shadow: 0 8px 24px rgba(239,68,68,0.20);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#scamRescueButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(239,68,68,0.30);
+}
+
+#scamRescueOptions {
+    max-width: 650px;
+    margin: 20px auto;
+    padding: 22px;
+    background: linear-gradient(145deg, #151d2e, #0d1321);
+    border: 1px solid rgba(148,163,184,0.22);
+    border-radius: 18px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+    text-align: center;
+}
+
+#scamRescueOptions h3 {
+    margin: 0 0 18px;
+    color: #f8fafc;
+    font-size: 19px;
+    line-height: 1.5;
+}
+
+#scamRescueOptions button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 14px 16px;
+    background: #1e293b;
+    color: #f1f5f9;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+#scamRescueOptions button:hover {
+    background: #263449;
+    border-color: #60a5fa;
+}
+
+#rescueAdvice {
+    margin-top: 18px !important;
+    padding: 20px;
+    background: #111c2e;
+    color: #e2e8f0;
+    border: 1px solid #334155;
+    border-left: 4px solid #38bdf8;
+    border-radius: 12px;
+    text-align: left;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+}
+
+#rescueAdvice h3 {
+    color: #7dd3fc;
+    margin-top: 0;
+    font-size: 18px;
+}
+
+#rescueAdvice ol {
+    padding-left: 24px;
+}
+
+#rescueAdvice li {
+    padding-left: 4px;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 600px) {
+    #scamRescueOptions {
+        padding: 15px;
+        border-radius: 14px;
+    }
+
+    #scamRescueOptions button {
+        font-size: 14px;
+        padding: 13px 12px;
+    }
+
+    #rescueAdvice {
+        padding: 15px;
+    }
+}
+/* 🚀 FRAUDEXA — COOL PREMIUM ANIMATIONS */
+
+@keyframes rescueFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes rescueGlow {
+    0%, 100% {
+        box-shadow: 0 0 8px rgba(239, 68, 68, 0.18),
+                    0 8px 24px rgba(239, 68, 68, 0.15);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(239, 68, 68, 0.4),
+                    0 8px 30px rgba(239, 68, 68, 0.22);
+    }
+}
+
+@keyframes rescueShine {
+    from {
+        left: -120%;
+    }
+    to {
+        left: 150%;
+    }
+}
+
+/* Main Rescue Button */
+#scamRescueButton {
+    position: relative;
+    overflow: hidden;
+    animation: rescueGlow 3s ease-in-out infinite;
+    transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+#scamRescueButton::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+        110deg,
+        transparent,
+        rgba(255, 255, 255, 0.22),
+        transparent
+    );
+    transform: skewX(-20deg);
+    animation: rescueShine 4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+#scamRescueButton:hover {
+    transform: translateY(-3px) scale(1.01);
+    filter: brightness(1.1);
+}
+
+/* Rescue Options Entrance */
+#scamRescueOptions {
+    animation: rescueFadeIn 0.45s ease-out both;
+}
+
+/* Individual Option Buttons */
+#scamRescueOptions button {
+    position: relative;
+    overflow: hidden;
+    transition:
+        transform 0.22s ease,
+        box-shadow 0.22s ease,
+        border-color 0.22s ease,
+        background 0.22s ease;
+}
+
+#scamRescueOptions button:hover {
+    transform: translateY(-3px);
+    border-color: #38bdf8;
+    box-shadow: 0 7px 20px rgba(56, 189, 248, 0.13);
+}
+
+#scamRescueOptions button:active {
+    transform: scale(0.98);
+}
+
+/* Advice Card Animation */
+#rescueAdvice {
+    animation: rescueFadeIn 0.35s ease-out both;
+}
+
+/* Keyboard Accessibility */
+#scamRescueButton:focus-visible,
+#scamRescueOptions button:focus-visible {
+    outline: 2px solid #7dd3fc;
+    outline-offset: 4px;
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    #scamRescueButton,
+    #scamRescueButton::after,
+    #scamRescueOptions,
+    #scamRescueOptions button,
+    #rescueAdvice {
+        animation: none !important;
+        transition: none !important;
+    }
+}
     </style>
 </head>
 
@@ -426,7 +645,26 @@
                     Check Now
                 </button>
             </form>
+<div style="margin-top: 20px; text-align: center;">
+    <button
+        type="button"
+        id="scamRescueButton"
+        onclick="showScamRescue()"
+        style="padding: 12px 20px; background: #dc2626; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">
+        🚨 Already Scammed? Get Help Now
+    </button>
+</div>
 
+<div id="scamRescueOptions" style="display: none; margin-top: 20px;">
+    <h3>If you've been scammed, choose what happened:</h3>
+
+    <button type="button" onclick="showRescueAdvice('money')">💸 I Sent Money</button>
+    <button type="button" onclick="showRescueAdvice('otp')">🔐 I Shared OTP / Password</button>
+    <button type="button" onclick="showRescueAdvice('link')">🔗 I Clicked a Suspicious Link</button>
+    <button type="button" onclick="showRescueAdvice('app')">📱 I Installed a Suspicious App</button>
+
+    <div id="rescueAdvice" style="margin-top: 15px;"></div>
+</div>
             <p class="helper-text">
                 Enter a message or upload a screenshot. You can also do both.
                 Maximum image size: 5 MB.
@@ -600,7 +838,7 @@ const response = await fetch(
     try {
         data = await response.json();
     } catch {
-        throw new Error(
+        throw new Error(-
             "The API returned an invalid response. Please check the server."
         );
     }
@@ -748,6 +986,62 @@ try {
 } catch (error) {
     console.error("Fraudexa Firebase initialization error:", error);
 }
+function showScamRescue() {
+    const options = document.getElementById("scamRescueOptions");
+
+    if (options) {
+        options.style.display =
+            options.style.display === "none" ? "block" : "none";
+    }
+}
+
+function showRescueAdvice(type) {
+    const advice = document.getElementById("rescueAdvice");
+    if (!advice) return;
+
+    const guides = {
+        money: `
+            <h3>If You Sent Money</h3>
+            <ol>
+                <li>Contact your bank or payment provider immediately.</li>
+                <li>In India, call <strong>1930</strong> to report financial cyber fraud.</li>
+                <li>Report at <a href="https://cybercrime.gov.in/" target="_blank" rel="noopener noreferrer">National Cyber Crime Reporting Portal</a>.</li>
+                <li>Save transaction IDs, screenshots and messages.</li>
+            </ol>
+        `,
+        otp: `
+            <h3>If You Shared an OTP or Password</h3>
+            <ol>
+                <li>Change your password using the official app or website.</li>
+                <li>Contact your bank immediately if your financial account may be affected.</li>
+                <li>Never share another OTP, UPI PIN or password.</li>
+                <li>Sign out of unfamiliar sessions and enable two-factor authentication.</li>
+            </ol>
+        `,
+        link: `
+            <h3>If You Clicked a Suspicious Link</h3>
+            <ol>
+                <li>Close the website. Do not enter any more information.</li>
+                <li>If you entered a password, change it using the official website.</li>
+                <li>If you shared financial information, contact your bank immediately.</li>
+                <li>Watch for suspicious account activity.</li>
+            </ol>
+        `,
+        app: `
+            <h3>If You Installed a Suspicious App</h3>
+            <ol>
+                <li>Uninstall the suspicious app and review its permissions.</li>
+                <li>Run your device's built-in security scan.</li>
+                <li>If you suspect unauthorized access, disconnect from the internet.</li>
+                <li>If banking details may be compromised, contact your bank immediately.</li>
+            </ol>
+        `
+    };
+
+    advice.innerHTML = guides[type] || "<p>Please choose an option.</p>";
+}
+window.showScamRescue = showScamRescue;
+window.showRescueAdvice = showRescueAdvice;
 </script>
 
 </body>
