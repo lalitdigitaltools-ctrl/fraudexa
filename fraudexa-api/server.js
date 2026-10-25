@@ -271,15 +271,25 @@ app.use((error, req, res, next) => {
 
     next();
 });
-// FRAUDEXA SCAM RADAR - Initial API
+// FRAUDEXA SCAM RADAR API
+const scamRadarReports = [];
+
 app.get("/api/scam-radar", (req, res) => {
+  const radiusKm = Math.min(
+    Math.max(Number(req.query.radiusKm) || 50, 1),
+    70
+  );
+
   res.json({
     success: true,
     feature: "Fraudexa Scam Radar",
     message: "Scam Radar API is active",
-    radiusKm: 50,
-    alerts: [],
-    note: "No verified local scam alerts are available yet."
+    radiusKm,
+    totalVerifiedAlerts: scamRadarReports.length,
+    alerts: scamRadarReports,
+    note: scamRadarReports.length
+      ? "Reports available in this server session."
+      : "No verified local scam alerts are available yet."
   });
 });
 app.listen(PORT, () => {
