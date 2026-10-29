@@ -686,6 +686,229 @@
         </div>
     </section>
 </main>
+<!-- FRAUDEXA LIVE SCAM DASHBOARD -->
+<section id="liveDashboard" class="live-dashboard">
+  <div class="dashboard-header">
+    <span class="dashboard-badge">🛡️ FRAUDEXA SECURITY</span>
+    <h2>Live Scam Dashboard</h2>
+    <p>Check the latest available scam safety information.</p>
+  </div>
+
+  <div class="dashboard-grid">
+    <div class="dashboard-card">
+      <span>📊</span>
+      <h3 id="totalReports">—</h3>
+      <p>Available Reports</p>
+    </div>
+
+    <div class="dashboard-card">
+      <span>🚨</span>
+      <h3 id="highRiskReports">—</h3>
+      <p>High-Risk Reports</p>
+    </div>
+
+    <div class="dashboard-card">
+      <span>📍</span>
+      <h3 id="selectedCity">Patan</h3>
+      <p>Selected City</p>
+    </div>
+  </div>
+
+  <div class="dashboard-controls">
+    <label for="citySelect">Choose your city</label>
+    <select id="citySelect">
+      <option value="Patan">Patan</option>
+      <option value="Ahmedabad">Ahmedabad</option>
+      <option value="Surat">Surat</option>
+      <option value="Vadodara">Vadodara</option>
+      <option value="Rajkot">Rajkot</option>
+      <option value="Other">Other</option>
+    </select>
+
+    <button id="refreshDashboard" type="button">
+      ↻ Refresh Dashboard
+    </button>
+  </div>
+
+  <p id="dashboardStatus" role="status">
+    Connecting to Fraudexa Scam Radar…
+  </p>
+
+  <div id="cityAlerts" class="city-alerts">
+    <p>No verified city alerts have been loaded yet.</p>
+  </div>
+
+  <small class="dashboard-note">
+    Safety notice: An empty alert list does not mean a city is scam-free.
+    Always verify suspicious messages independently.
+  </small>
+</section>
+
+<style>
+  .live-dashboard {
+    width: min(100% - 32px, 900px);
+    margin: 35px auto;
+    padding: 24px;
+    box-sizing: border-box;
+    color: #f3f7f6;
+    background: #101b1a;
+    border: 1px solid #24413b;
+    border-radius: 22px;
+  }
+
+  .dashboard-header { text-align: center; }
+
+  .dashboard-badge {
+    color: #36dca0;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .dashboard-header h2 {
+    font-size: clamp(25px, 5vw, 36px);
+    margin: 12px 0;
+  }
+
+  .dashboard-header p,
+  .dashboard-note { color: #aebfba; }
+
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin: 24px 0;
+  }
+
+  .dashboard-card {
+    min-width: 0;
+    padding: 16px 8px;
+    text-align: center;
+    background: #192824;
+    border: 1px solid #2c4840;
+    border-radius: 15px;
+    overflow-wrap: anywhere;
+  }
+
+  .dashboard-card h3 {
+    color: #35e58b;
+    font-size: clamp(20px, 4vw, 28px);
+    margin: 10px 0 6px;
+  }
+
+  .dashboard-card p { font-size: 12px; margin: 0; }
+
+  .dashboard-controls {
+    display: grid;
+    gap: 10px;
+  }
+
+  .dashboard-controls select,
+  .dashboard-controls button {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 16px;
+  }
+
+  .dashboard-controls select {
+    color: white;
+    background: #192824;
+    border: 1px solid #3b5b50;
+  }
+
+  .dashboard-controls button {
+    color: #06140b;
+    background: #20df4b;
+    border: 0;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  #dashboardStatus {
+    color: #8edcff;
+    overflow-wrap: anywhere;
+  }
+
+  .city-alerts {
+    padding: 14px;
+    border-radius: 12px;
+    background: #172521;
+    overflow-wrap: anywhere;
+  }
+
+  .dashboard-note {
+    display: block;
+    line-height: 1.6;
+    margin-top: 16px;
+  }
+
+  @media (max-width: 480px) {
+    .live-dashboard { padding: 16px; }
+    .dashboard-grid { gap: 7px; }
+    .dashboard-card { padding: 13px 4px; }
+  }
+</style>
+
+<script>
+(() => {
+  const API = "https://fraudexa.onrender.com";
+  const citySelect = document.getElementById("citySelect");
+  const status = document.getElementById("dashboardStatus");
+  const alertsBox = document.getElementById("cityAlerts");
+  const refreshButton = document.getElementById("refreshDashboard");
+
+  async function refreshDashboard() {
+    const city = citySelect.value;
+
+    document.getElementById("selectedCity").textContent = city;
+    status.textContent = "Checking available Scam Radar data…";
+    alertsBox.replaceChildren();
+
+    try {
+      const response = await fetch(
+        `${API}/api/scam-radar?radiusKm=50`,
+        { cache: "no-store" }
+      );
+
+      if (!response.ok) throw new Error("API unavailable");
+
+      const data = await response.json();
+      const reports = Array.isArray(data.alerts) ? data.alerts : [];
+
+      document.getElementById("totalReports").textContent =
+        Number(data.totalVerifiedAlerts ?? reports.length);
+
+      document.getElementById("highRiskReports").textContent =
+        reports.filter(item =>
+          String(item.risk || item.severity || "").toLowerCase() === "high"
+        ).length;
+
+      const message = document.createElement("p");
+      message.textContent = reports.length
+        ? `${reports.length} available report(s). City-level verification is not confirmed by this API.`
+        : `No verified scam alerts are currently available for ${city}. This does not mean the city is scam-free.`;
+
+      alertsBox.appendChild(message);
+      status.textContent =
+        `Last checked: ${new Date().toLocaleString()}. Data source: Fraudexa API.`;
+    } catch {
+      document.getElementById("totalReports").textContent = "—";
+      document.getElementById("highRiskReports").textContent = "—";
+      status.textContent =
+        "Scam Radar data is temporarily unavailable. Please try again later.";
+      const message = document.createElement("p");
+      message.textContent =
+        "We couldn't load verified alerts. No live data is being assumed.";
+      alertsBox.appendChild(message);
+    }
+  }
+
+  refreshButton.addEventListener("click", refreshDashboard);
+  citySelect.addEventListener("change", refreshDashboard);
+  refreshDashboard();
+})();
+</script>
 
 <footer>
     <p>FRAUDEXA — Know Before You Trust</p>
