@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#070b16">
+<meta name="description" content="Fraudexa helps you identify suspicious messages, links and images."><title>Fraudexa — Know Before You Trust</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070b16;--panel:#101a2e;--line:#263550;--text:#f4f7ff;--muted:#9aa8c2;--cyan:#56e4f5;--blue:#8294ff;--green:#45e0ad;--red:#ff7187;--amber:#ffc76b}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 80% -10%,#435fff33,transparent 35%),radial-gradient(ellipse at 0 40%,#22d3ee12,transparent 30%),var(--bg);color:var(--text);font-family:"DM Sans",sans-serif;overflow-x:hidden}a{color:inherit;text-decoration:none}button,textarea{font:inherit}.wrap{width:min(1160px,calc(100% - 40px));margin:auto}.nav{height:76px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff14;position:relative;z-index:5}.brand{display:flex;align-items:center;gap:10px;font:700 22px "Space Grotesk";letter-spacing:-.7px}.logo{width:38px;height:38px;border-radius:13px;display:grid;place-items:center;color:#06101c;background:linear-gradient(135deg,var(--cyan),var(--blue));box-shadow:0 0 28px #56e4f544}.links{display:flex;gap:26px;color:var(--muted);font-size:14px}.links a:hover{color:var(--cyan)}.navright{display:flex;gap:9px}.btn{border:0;border-radius:13px;padding:12px 18px;font-weight:700;cursor:pointer;display:inline-flex;justify-content:center;align-items:center;gap:8px;transition:.22s}.btn:hover{transform:translateY(-2px);filter:brightness(1.08)}.primary{color:#06101c;background:linear-gradient(110deg,var(--cyan),#9aa7ff);box-shadow:0 10px 30px #56e4f52b}.ghost{background:#ffffff09;border:1px solid var(--line);color:var(--text)}.menu{display:none;background:none;border:1px solid var(--line);color:white;border-radius:10px;padding:8px 12px;font-size:20px}
+.hero{padding:76px 0 52px;display:grid;grid-template-columns:1.08fr .92fr;gap:40px;align-items:center;min-height:550px}.eyebrow{display:inline-flex;gap:9px;align-items:center;border:1px solid #56e4f544;background:#56e4f50c;color:var(--cyan);border-radius:30px;padding:8px 13px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase}.dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 5px #45e0ad22;animation:pulse 1.8s infinite}@keyframes pulse{50%{box-shadow:0 0 0 9px #45e0ad00}}h1{font:700 clamp(44px,6vw,70px)/1.04 "Space Grotesk";letter-spacing:-3px;margin:23px 0}.grad{background:linear-gradient(100deg,#fff,var(--cyan),#a0aaff);background-clip:text;color:transparent}.hero p{max-width:560px;color:var(--muted);font-size:17px;line-height:1.75}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:27px}.trust{display:flex;gap:18px;flex-wrap:wrap;color:#8190aa;font-size:12px;margin-top:26px}.trust span:before{content:"✓";color:var(--green);margin-right:6px}.visual{min-height:390px;display:grid;place-items:center;position:relative}.orb{position:absolute;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#56e4f544,#536eff19 48%,transparent 70%);animation:float 7s ease-in-out infinite}@keyframes float{50%{transform:translateY(-14px) scale(1.04)}}.scanner{width:min(100%,420px);position:relative;padding:24px;border:1px solid #8ba4ff40;border-radius:26px;background:linear-gradient(145deg,#182644ed,#0c1426f5);box-shadow:0 24px 80px #0008;transform:rotate(1.5deg);animation:enter .8s ease both}@keyframes enter{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:rotate(1.5deg)}}.scanhead,.scanfoot{display:flex;justify-content:space-between;color:#b7c5e0;font-size:12px}.live{color:var(--green)}.shield{height:150px;display:grid;place-items:center;font-size:86px;color:var(--cyan);filter:drop-shadow(0 0 26px #56e4f577);animation:glow 3s ease-in-out infinite}@keyframes glow{50%{transform:scale(1.08);filter:drop-shadow(0 0 42px #56e4f5aa)}}.bar{height:7px;background:#263653;border-radius:20px;overflow:hidden}.bar i{display:block;height:100%;width:75%;background:linear-gradient(90deg,var(--cyan),var(--blue));animation:load 2.5s infinite alternate}@keyframes load{from{width:35%}to{width:90%}}.scanfoot{margin-top:14px}.float{position:absolute;background:#111d32;border:1px solid var(--line);border-radius:14px;padding:12px 15px;box-shadow:0 18px 50px #0007;font-size:12px;animation:float 5s infinite}.float b{display:block;color:var(--green);margin-top:4px}.f1{top:25px;right:-4px}.f2{bottom:20px;left:-5px}
+.section{padding:65px 0}.head{text-align:center;max-width:680px;margin:0 auto 32px}.kicker{color:var(--cyan);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase}.head h2{font:700 clamp(30px,4vw,44px) "Space Grotesk";letter-spacing:-1.4px;margin:12px 0}.head p{color:var(--muted);line-height:1.7}.card{background:linear-gradient(145deg,#111c31,#0c1425);border:1px solid var(--line);border-radius:22px;box-shadow:0 16px 55px #0003}.checker{max-width:850px;margin:auto;padding:25px}.tabs{display:flex;gap:7px;background:#080f1e;border:1px solid var(--line);border-radius:13px;padding:5px;width:max-content;margin-bottom:19px}.tab{border:0;background:none;color:var(--muted);padding:10px 15px;border-radius:9px;cursor:pointer;font-weight:600}.tab.active{background:#233653;color:var(--cyan)}.label{display:block;color:#d9e3f5;font-size:13px;font-weight:700;margin:12px 0 9px}textarea{width:100%;min-height:145px;resize:vertical;background:#080f1e;border:1px solid #273754;border-radius:14px;color:white;padding:16px;outline:none;line-height:1.6}textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 3px #56e4f51b}.filebox{border:1px dashed #405577;border-radius:14px;padding:18px;text-align:center;color:var(--muted);background:#080f1e}.filebox input{max-width:100%;margin-top:10px}.hint{font-size:12px;color:#8291aa;margin-top:9px}.bottom{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-top:17px}.result{display:none;margin-top:20px;padding:19px;border:1px solid var(--line);border-radius:15px;background:#080f1e;line-height:1.65}.result.show{display:block;animation:enter .3s}.rhead{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}.badge{border-radius:30px;padding:6px 11px;font-size:12px;font-weight:800;background:#45e0ad1a;color:var(--green)}.badge.high{background:#ff71871c;color:var(--red)}.badge.medium{background:#ffc76b1c;color:var(--amber)}.result p{color:#b7c5db;margin:12px 0 0}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.feature{padding:23px;transition:.25s}.feature:hover{transform:translateY(-5px);border-color:#56e4f566}.icon{width:45px;height:45px;border-radius:14px;background:#56e4f51a;color:var(--cyan);display:grid;place-items:center;font-size:22px;margin-bottom:16px}.feature h3{font:600 19px "Space Grotesk";margin:0 0 8px}.feature p{color:var(--muted);font-size:14px;line-height:1.7;margin:0}
+.radar{padding:24px}.radarhead{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.radarhead h3{font:600 22px "Space Grotesk";margin:0}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0}.stat{padding:16px;background:#080f1e;border:1px solid var(--line);border-radius:14px}.stat strong{font:700 26px "Space Grotesk";display:block}.stat small{color:var(--muted)}.alerts{display:grid;gap:10px}.alert{padding:14px;border:1px solid var(--line);border-radius:12px;display:flex;justify-content:space-between;gap:12px;align-items:center;color:#c5d0e3;font-size:13px}.alert small{color:var(--muted);display:block;margin-top:4px}.empty{padding:23px;text-align:center;color:var(--muted);background:#080f1e;border-radius:13px;border:1px dashed #30415e}.rescue{display:grid;grid-template-columns:.9fr 1.1fr;gap:28px;align-items:center;padding:30px}.rescue h2{font:700 35px "Space Grotesk";letter-spacing:-1px}.rescue p{color:var(--muted);line-height:1.7}.steps{display:grid;gap:11px}.step{display:flex;gap:13px;padding:13px;background:#080f1e;border:1px solid var(--line);border-radius:12px}.num{width:28px;height:28px;flex:0 0 28px;display:grid;place-items:center;background:#56e4f51c;color:var(--cyan);border-radius:9px;font-weight:800}.step b{display:block;font-size:14px}.step small{display:block;color:var(--muted);line-height:1.5;margin-top:4px}footer{border-top:1px solid #ffffff14;padding:26px 0;color:#8291aa;font-size:12px}.foot{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#182742;border:1px solid #56e4f555;padding:12px 18px;border-radius:12px;z-index:20;transition:.3s}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:850px){.hero{grid-template-columns:1fr;padding:52px 0 25px;gap:8px}.hero>div:first-child{text-align:center}.hero p{margin:auto}.actions,.trust{justify-content:center}.visual{min-height:350px}.links{display:none;position:absolute;top:68px;left:0;right:0;background:#0d1629;border:1px solid var(--line);border-radius:14px;padding:18px;flex-direction:column;gap:17px}.links.open{display:flex}.menu{display:block}.rescue{grid-template-columns:1fr}}
+@media(max-width:600px){.wrap{width:calc(100% - 28px)}.nav{height:65px}.brand{font-size:20px}.logo{width:34px;height:34px}.navright .ghost{display:none}.navright .btn{padding:10px 12px;font-size:12px}h1{font-size:43px;letter-spacing:-2.2px;margin:18px 0}.hero{padding:42px 0 15px;min-height:auto}.hero p{font-size:15px}.actions .btn{width:100%}.visual{min-height:310px}.scanner{width:94%;padding:18px}.shield{height:115px;font-size:68px}.orb{width:260px;height:260px}.float{font-size:10px;padding:9px 11px}.f1{top:4px}.f2{bottom:4px}.section{padding:47px 0}.head{margin-bottom:22px}.head h2{font-size:32px}.checker{padding:15px}.tabs{display:grid;grid-template-columns:1fr 1fr;width:100%}.tab{padding:10px 5px;font-size:12px}textarea{min-height:130px;font-size:14px}.bottom .btn{width:100%}.grid{grid-template-columns:1fr}.feature{padding:19px}.radar{padding:15px}.stats{gap:7px}.stat{padding:11px 8px}.stat strong{font-size:22px}.stat small{font-size:10px}.alert{align-items:flex-start}.rescue{padding:19px}.rescue h2{font-size:29px}.foot{flex-direction:column}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition:none!important}}
+
+/* FRAUDEXA PREMIUM PRICING */
+#pricing {
+  position: relative;
+  padding: 90px 22px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(0,255,190,.10), transparent 60%);
+}
+
+#pricing .head {
+  text-align: center;
+  margin: 0 auto 45px;
+  max-width: 650px;
+}
+
+#pricing .head h2 {
+  font-size: clamp(30px, 5vw, 48px);
+  font-weight: 850;
+  letter-spacing: -1.5px;
+  background: linear-gradient(100deg,#fff,#65f5d0,#a9b8ff);
+  -moz-animation: text;
+  color: transparent;
+}
+
+#pricing .head p {
+  color: #9aa8c2;
+  margin-top: 12px;
+}
+
+.pricing-grid {
+  max-width: 1050px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 22px;
+  align-items: stretch;
+}
+
+.price-card {
+  position: relative;
+  padding: 34px 25px;
+  border-radius: 23px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: linear-gradient(145deg,#151e31,#0b1020);
+  box-shadow: 0 15px 45px rgba(0,0,0,.25);
+  transition: transform .4s ease, border-color .4s ease,
+              box-shadow .4s ease;
+  animation: priceReveal .8s ease both;
+}
+
+.price-card:nth-child(2) { animation-delay: .15s; }
+.price-card:nth-child(3) { animation-delay: .3s; }
+
+.price-card:hover {
+  transform: translateY(-12px);
+  border-color: #55e9ca;
+  box-shadow: 0 20px 55px rgba(0,230,190,.16);
+}
+
+.price-card h3 {
+  font-size: 25px;
+  color: #fff;
+  margin: 12px 0;
+}
+
+.price-card h2 {
+  font-size: 38px;
+  color: #65f5d0;
+  margin: 20px 0;
+}
+
+.price-card h2 small {
+  font-size: 13px;
+  color: #9aa8c2;
+}
+
+.price-card p {
+  color: #aab6cc;
+  min-height: 45px;
+  line-height: 1.6;
+}
+
+.price-card .btn {
+  display: inline-block;
+  width: 100%;
+  margin-top: 22px;
+  padding: 14px;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: .3s ease;
+}
+
+.price-card .btn:hover {
+  transform: scale(1.04);
+  filter: brightness(1.15);
+}
+
+.price-card.featured {
+  border: 1px solid #55e9ca;
+  background: linear-gradient(150deg,#142c35,#151b36 70%);
+  box-shadow: 0 0 35px rgba(0,240,190,.12);
+}
+
+.price-card.featured::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 23px;
+  border: 1px solid rgba(90,255,220,.35);
+  pointer-events: none;
+  animation: borderGlow 3s ease-in-out infinite;
+}
+
+@keyframes priceReveal {
+  from { opacity: 0; transform: translateY(35px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes borderGlow {
+  0%,100% { opacity: .25; }
+  50% { opacity: 1; }
+}
+
+@media(max-width:750px) {
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+  }
+  .price-card.featured {
+    transform: scale(1.02);
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  .price-card,
+  .price-card.featured::before {
+    animation: none;
+    transition: none;
+  }
+}
+/* PREMIUM PLAN FEATURES */
+.plan-features {
+  list-style: none;
+  padding: 0;
+  margin: 25px 0;
+  text-align: left;
+}
+
+.plan-features li {
+  color: #dce7f5;
+  font-size: 15px;
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  transition: .3s ease;
+}
+
+.plan-features li:hover {
+  color: #65f5d0;
+  padding-left: 8px;
+}
+
+.price-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.price-card .btn {
+  margin-top: auto;
+}
+</style></head>
+<body>
+<header class="wrap nav"><a class="brand" href="#"><span class="logo">F</span> FRAUDEXA</a>
+<nav class="links" id="links"><a href="#checker">Scam Checker</a><a href="#features">Features</a><a href="#radar">Scam Radar</a><a href="#rescue">Scam Rescue</a></nav>
+<div class="navright"><a class="btn ghost" href="login.html">Log in</a><a class="btn primary" href="#checker">Check a message ↗</a><button class="menu" id="menu" aria-label="Menu">☰</button></div></header>
+<main>
+<section class="wrap hero"><div><span class="eyebrow"><i class="dot"></i> Your digital safety companion</span><h1>Know before<br><span class="grad">you trust.</span></h1><p>Suspicious message? Strange link? Unexpected offer? Check the warning signs before you click, pay or share your details.</p><div class="actions"><a class="btn primary" href="#checker">Scan for scams →</a><a class="btn ghost" href="#rescue">I need help now</a></div><div class="trust"><span>Message analysis</span><span>Image support</span><span>Safety guidance</span></div></div>
+<div class="visual"><div class="orb"></div><div class="scanner"><div class="scanhead"><b>FRAUDEXA INTELLIGENCE</b><span class="live">● SYSTEM READY</span></div><div class="shield">⬡</div><div class="bar"><i></i></div><div class="scanfoot"><span>Threat detection engine</span><b>ACTIVE</b></div></div><div class="float f1">REAL-TIME CHECK<b>Stay one step ahead</b></div><div class="float f2">YOUR SAFETY MATTERS<b>Think. Check. Protect.</b></div></div></section>
+<section class="section" id="checker"><div class="wrap"><div class="head"><span class="kicker">Smart protection</span><h2>Pause. Paste. <span class="grad">Protect.</span></h2><p>Paste a suspicious message or upload a screenshot. Fraudexa sends it to the connected analysis service.</p></div>
+<div class="card checker"><div class="tabs"><button class="tab active" data-mode="message">✉ Message check</button><button class="tab" data-mode="image">▧ Image check</button></div>
+<div id="messagePanel"><label class="label" for="message">Suspicious message or link</label><textarea id="message" placeholder="Paste the SMS, WhatsApp message, email text or suspicious link here..."></textarea></div>
+<div id="imagePanel" hidden><label class="label" for="image">Upload screenshot or image</label><div class="filebox">Choose a screenshot to analyze<br><input id="image" type="file" accept="image/*"><div class="hint">Avoid uploading private IDs or sensitive personal information.</div></div></div>
+<div class="bottom"><span class="hint">🔒 Never share OTPs, passwords or banking PINs.</span><button class="btn primary" id="analyze">Analyze now →</button></div><div class="result" id="result" aria-live="polite"></div></div></div></section>
+<section class="section" id="features"><div class="wrap"><div class="head"><span class="kicker">Built for safer decisions</span><h2>Protection that thinks <span class="grad">ahead.</span></h2><p>Simple tools to help recognize suspicious activity and choose a safer next step.</p></div><div class="grid">
+<article class="card feature"><div class="icon">⌕</div><h3>Message & link checks</h3><p>Review suspicious wording, urgency, payment requests and links with the connected analysis service.</p></article>
+<article class="card feature"><div class="icon">▧</div><h3>Screenshot analysis</h3><p>Submit a screenshot of a suspicious message or offer for analysis, where supported by the backend.</p></article>
+<article class="card feature"><div class="icon">◈</div><h3>Scam Rescue guidance</h3><p>Find practical steps if you clicked a link, shared information or sent money by mistake.</p></article>
+</div></div></section>
+<section class="section" id="radar"><div class="wrap"><div class="head"><span class="kicker">Community awareness</span><h2>Scam <span class="grad">Radar.</span></h2><p>Alerts are shown only when returned by the connected service. An empty feed does not mean an area is scam-free.</p></div>
+<div class="card radar"><div class="radarhead"><h3>Latest reported alerts</h3><button class="btn ghost" id="refresh">↻ Refresh</button></div><div class="stats"><div class="stat"><strong id="count">—</strong><small>Alerts returned</small></div><div class="stat"><strong id="high">—</strong><small>High risk labels</small></div><div class="stat"><strong>India</strong><small>Safety resources</small></div></div><div class="alerts" id="alerts"><div class="empty">Loading available alerts…</div></div><p class="hint">Location-specific verification is not guaranteed.</p></div></div></section>
+<section class="section" id="rescue"><div class="wrap"><div class="card rescue"><div><span class="kicker">If something went wrong</span><h2>Act fast. <span class="grad">Stay calm.</span></h2><p>If you lost money or shared banking information in India, contact your bank immediately and report financial cyber fraud through official channels.</p><a class="btn primary" href="https://cybercrime.gov.in/" target="_blank" rel="noopener">Official cybercrime portal ↗</a></div><div class="steps">
+<div class="step"><span class="num">1</span><div><b>Call 1930 if money was lost</b><small>Report financial cyber fraud promptly using India's national helpline.</small></div></div>
+<div class="step"><span class="num">2</span><div><b>Contact your bank or payment provider</b><small>Ask them to block or secure affected cards, accounts or UPI access.</small></div></div>
+<div class="step"><span class="num">3</span><div><b>Save evidence</b><small>Keep transaction IDs, phone numbers, messages, links and screenshots.</small></div></div>
+<div class="step"><span class="num">4</span><div><b>Secure your accounts</b><small>Change exposed passwords, sign out of unknown sessions and never share OTPs.</small></div></div>
+</div></div></div></section>
+</main><footer><div class="wrap foot"><div><a class="brand" href="#"><span class="logo">F</span> FRAUDEXA</a><p style="margin:8px 0 0">Know Before You Trust.</p></div><div>© <span id="year"></span> Fraudexa. Stay alert. Stay safe.</div><div>Awareness tool only—not a guarantee or official investigation.</div></div></footer><div class="toast" id="toast"></div>
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {getAuth,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+// Existing Firebase web-app config. Never place private service-account keys in frontend code.
+const firebaseConfig={apiKey:"AIzaSyBNSTDIceQCupazPl4ZbzR4OFN64RVQgTY",authDomain:"fraudexa-15d6a.firebaseapp.com",projectId:"fraudexa-15d6a",storageBucket:"fraudexa-15d6a.firebasestorage.app",messagingSenderId:"891490763035",appId:"1:891490763035:web:15c654ed5946910ecc93be",measurementId:"G-X3K8MDGV7W"};
+try{const app=initializeApp(firebaseConfig);const auth=getAuth(app);onAuthStateChanged(auth,user=>{if(user){const a=document.querySelector('a[href="login.html"]');if(a)a.textContent="My account"}})}catch(e){console.warn("Firebase:",e)}
+const API="http://localhost:3000";const $=id=>document.getElementById(id);let mode="message";$("year").textContent=new Date().getFullYear();
+$("menu").onclick=()=>$("links").classList.toggle("open");document.querySelectorAll("#links a").forEach(a=>a.onclick=()=>$("links").classList.remove("open"));
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{mode=t.dataset.mode;document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x===t));$("messagePanel").hidden=mode!=="message";$("imagePanel").hidden=mode!=="image";$("result").classList.remove("show")});
+function safe(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function val(o,keys){for(const k of keys)if(o&&o[k]!=null)return o[k];return ""}
+function showResult(d){const risk=String(val(d,["risk","risk_level","level","severity","status"])||"Analysis complete"),r=risk.toLowerCase(),cls=/(high|danger|malicious|scam|critical)/.test(r)?"high":/(medium|suspicious|warning|moderate)/.test(r)?"medium":"",title=val(d,["title","verdict","result","message"])||"Analysis complete",ex=val(d,["explanation","reason","details","analysis","description","summary"]),advice=val(d,["recommendation","advice","next_steps","action"]);$("result").innerHTML=`<div class="rhead"><b>${safe(title)}</b><span class="badge ${cls}">${safe(risk)}</span></div>${ex?`<p>${safe(ex)}</p>`:""}${advice?`<p><b>Recommended action:</b> ${safe(advice)}</p>`:""}<p class="hint">Automated analysis can be wrong. Do not rely on this result alone for financial decisions.</p>`;$("result").classList.add("show")}
+$("analyze").onclick=async()=>{const msg=$("message").value.trim(),file=$("image").files[0];if(mode==="message"&&!msg){$("message").focus();return}if(mode==="image"&&!file)return;const form=new FormData();if(msg)form.append("message",msg);if(mode==="image"&&file)form.append("image",file);const b=$("analyze");b.disabled=true;b.textContent="Analyzing…";$("result").innerHTML="Connecting to Fraudexa analysis service…";$("result").classList.add("show");try{const res = await fetch(API+(mode==="image"?"/api/analyze":"/api/analyze-free"),{method:"POST",body:form});const raw=await res.text();let data;try{data=JSON.parse(raw)}catch{data={message:raw}}if(!res.ok)throw Error(val(data,["error","message"])||`Server error (${res.status})`);showResult(data)}catch(e){$("result").innerHTML=`<b style="color:var(--red)">Analysis could not be completed.</b><p>${safe(e.message||"Please try again later.")}</p><p class="hint">The backend may be waking up or temporarily unavailable. Retry in a moment.</p>`}finally{b.disabled=false;b.textContent="Analyze now →"}};
+async function radar(){const box=$("alerts");box.innerHTML='<div class="empty">Loading alerts…</div>';try{const res=await fetch(API+"/api/scam-radar?radiusKm=50");if(!res.ok)throw Error(`Server error (${res.status})`);const d=await res.json(),arr=Array.isArray(d)?d:(d.alerts||d.reports||[]);$("count").textContent=arr.length;$("high").textContent=arr.filter(a=>/high|critical/i.test(String(a.risk||a.severity||a.level||""))).length;if(!arr.length){box.innerHTML='<div class="empty">No alerts were returned right now.<br><small>This does not mean there are no scams in your area.</small></div>';return}box.innerHTML=arr.slice(0,12).map(a=>{const name=val(a,["title","type","scamType","category"])||"Reported suspicious activity",place=val(a,["city","location","area"])||"Location not verified",risk=val(a,["risk","severity","level"])||"Unrated",cls=/high|critical/i.test(risk)?"high":/medium/i.test(risk)?"medium":"";return `<div class="alert"><div><b>${safe(name)}</b><small>${safe(place)}</small></div><span class="badge ${cls}">${safe(risk)}</span></div>`}).join("")}catch(e){$("count").textContent="—";$("high").textContent="—";box.innerHTML=`<div class="empty">Scam Radar temporarily unavailable.<br><small>${safe(e.message)}</small></div>`}}
+$("refresh").onclick=radar;radar();
+</script>
+<section id="pricing" class="section">
+  <div class="head">
+    <span class="kicker">SIMPLE PRICING</span>
+    <h2>Choose Your Protection Plan</h2>
+    <p>Stay protected with Fraudexa.</p>
+  </div>
+
+  <div class="pricing-grid">
+    <div class="price-card">
+      <h3>Free</h3>
+      <h2>₹0 <small>/month</small></h2>
+      <ul class="plan-features">
+  <li>✓ Limited Scam Checks</li>
+  <li>✓ Basic Risk Analysis</li>
+  <li>✓ Scam Safety Guidance</li>
+</ul>
+      <a href="register.html" class="btn ghost">Get Started</a>
+    </div>
+
+    <div class="price-card featured">
+      <span class="kicker">MOST POPULAR</span>
+      <h3>Pro</h3>
+      <h2>₹99 <small>/month</small></h2>
+      <ul class="plan-features">
+  <li>✓ More Scam Checks</li>
+  <li>✓ Advanced AI Analysis</li>
+  <li>✓ Scan History</li>
+  <li>✓ Detailed Risk Reports</li>
+</ul>
+      <button class="btn primary" onclick="localStorage.setItem('selectedPlan','pro'); window.location.href='login.html';">Upgrade to Pro</button>
+    </div>
+
+    <div class="price-card">
+      <h3>Business</h3>
+      <h2>₹149 <small>/month</small></h2>
+      <ul class="plan-features">
+  <li>✓ Everything in Pro</li>
+  <li>✓ Team Access</li>
+  <li>✓ Business Dashboard</li>
+  <li>✓ Advanced Business Reports</li>
+  <li>✓ Team Activity Overview</li>
+</ul>
+   <button class="btn ghost" onclick="localStorage.setItem('selectedPlan','business'); window.location.href='login.html';">Choose Business</button>
+    </div>
+  </div>
+</section>
+</body></html>
