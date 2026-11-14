@@ -3,6 +3,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const OpenAI = require("openai");
 const multer = require("multer");
+const Razorpay = require("razorpay");
 
 dotenv.config();
 
@@ -12,6 +13,10 @@ const PORT = process.env.PORT || 3000;
 const openai = process.env.OPENAI_API_KEY
     ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
     : null;
+const razorpay = new Razorpay({
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret: process.env.RAZORPAY_KEY_SECRET
+});
 
 app.use(cors());
 app.use(express.json({ limit: "10mb" }));
@@ -291,6 +296,41 @@ app.get("/api/scam-radar", (req, res) => {
       ? "Reports available in this server session."
       : "No verified local scam alerts are available yet."
   });
+});
+app.post("/api/create-subscription", async (req, res) => {
+  try {
+    const { plan } = req.body;
+
+    const plans = {
+      pro: "plan_TyxLuxfUK99ASi",
+      business: "plan_TyxPUsmcjs7rGX"
+    };
+
+    if (!plans[plan]) {
+      return res.status(400).json({
+        error: "Invalid subscription plan"
+      });
+    }
+
+    const subscription = await razorpay.subscriptions.create({
+      plan_id: plans[plan],
+      total_count: 12,
+      quantity: 1,
+      customer_notify: 1
+    });
+
+    res.json({
+      success: true,
+      subscription_id: subscription.id,
+      short_url: subscription.short_url
+    });
+
+  } catch (error) {
+    console.error("Subscription Error:", error);
+    res.status(500).json({
+      error: "Unable to create subscription"
+    });
+  }
 });
 app.listen(PORT, () => {
     console.log(`Fraudexa API running on http://localhost:${PORT}`);
