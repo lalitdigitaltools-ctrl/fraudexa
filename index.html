@@ -1364,7 +1364,7 @@
     // Existing Firebase web-app config. Never place private service-account keys in frontend code.
     const firebaseConfig = { apiKey: "AIzaSyBNSTDIceQCupazPl4ZbzR4OFN64RVQgTY", authDomain: "fraudexa-15d6a.firebaseapp.com", projectId: "fraudexa-15d6a", storageBucket: "fraudexa-15d6a.firebasestorage.app", messagingSenderId: "891490763035", appId: "1:891490763035:web:15c654ed5946910ecc93be", measurementId: "G-X3K8MDGV7W" };
     try { const app = initializeApp(firebaseConfig); const auth = getAuth(app); onAuthStateChanged(auth, user => { if (user) { const a = document.querySelector('a[href="login.html"]'); if (a) a.textContent = "My account" } }) } catch (e) { console.warn("Firebase:", e) }
-    const API = "http://localhost:3000"; const $ = id => document.getElementById(id); let mode = "message"; $("year").textContent = new Date().getFullYear();
+    const API = "https://fraudexa.onrender.com"; const $ = id => document.getElementById(id); let mode = "message"; $("year").textContent = new Date().getFullYear();
     $("menu").onclick = () => $("links").classList.toggle("open"); document.querySelectorAll("#links a").forEach(a => a.onclick = () => $("links").classList.remove("open"));
     document.querySelectorAll(".tab").forEach(t => t.onclick = () => { mode = t.dataset.mode; document.querySelectorAll(".tab").forEach(x => x.classList.toggle("active", x === t)); $("messagePanel").hidden = mode !== "message"; $("imagePanel").hidden = mode !== "image"; $("result").classList.remove("show") });
     function safe(v) { return String(v ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])) }
@@ -1467,6 +1467,38 @@
   });
 }
   </script>
+  <script>
+let deferredPrompt;
+
+const installBtn = document.getElementById("installFraudexaBtn");
+
+window.addEventListener("beforeinstallprompt", (event) => {
+  event.preventDefault();
+  deferredPrompt = event;
+  installBtn.style.display = "inline-flex";
+});
+
+installBtn.addEventListener("click", async () => {
+  if (!deferredPrompt) {
+    alert("Open Chrome menu and select Install app or Add to Home Screen.");
+    return;
+  }
+
+  deferredPrompt.prompt();
+  const result = await deferredPrompt.userChoice;
+
+  if (result.outcome === "accepted") {
+    installBtn.style.display = "none";
+  }
+
+  deferredPrompt = null;
+});
+
+window.addEventListener("appinstalled", () => {
+  installBtn.style.display = "none";
+  deferredPrompt = null;
+});
+</script>
 </body>
 
 </html>
