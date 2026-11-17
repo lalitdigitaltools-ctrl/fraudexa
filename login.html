@@ -595,7 +595,7 @@ function getReturnDestination() {
 
     const url = new URL(
       destination,
-      window.location.origin
+      window.location.href
     );
 
     if (url.origin !== window.location.origin) {
