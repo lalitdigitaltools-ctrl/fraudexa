@@ -327,6 +327,13 @@
       from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
 
 
+    import {
+  getFirestore,
+  doc,
+  setDoc,
+  serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";  
     // ==========================================
     // FRAUDEXA FIREBASE CONFIG
     // ==========================================
@@ -347,6 +354,7 @@
 
     // Firebase Authentication
     const auth = getAuth(app);
+    const db = getFirestore(app);
 
 
     // ==========================================
@@ -556,6 +564,16 @@
           displayName: name
         });
 
+        // Save user profile in Firestore
+await setDoc(doc(db, "users", user.uid), {
+  uid: user.uid,
+  name: name,
+  email: email,
+  mobile: mobile,
+  plan: "free",
+  subscriptionStatus: "inactive",
+  createdAt: serverTimestamp()
+});
 
         showMessage(
           "Account created successfully! Redirecting...",
