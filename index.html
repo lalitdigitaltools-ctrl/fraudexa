@@ -1208,6 +1208,68 @@
       background: linear-gradient(90deg, #d4af37, #f59e0b) !important;
       color: #111 !important;
     }
+    /* FRAUDEXA ACCOUNT MENU */
+.account-menu {
+  position: relative;
+}
+
+.account-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 30px;
+  padding: 8px 14px;
+  background: #101c2b;
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.account-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #16c784;
+  color: #071b16;
+}
+
+.account-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 240px;
+  padding: 16px;
+  background: #101c2b;
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 14px;
+  color: white;
+  z-index: 999;
+  box-shadow: 0 12px 35px rgba(0,0,0,.3);
+}
+
+.account-dropdown[hidden] {
+  display: none;
+}
+
+.account-email {
+  font-size: 13px;
+  color: #aab7c5;
+  overflow-wrap: anywhere;
+}
+
+.account-logout {
+  width: 100%;
+  margin-top: 14px;
+  padding: 10px;
+  border: 0;
+  border-radius: 8px;
+  background: #ef4444;
+  color: white;
+  cursor: pointer;
+}
   </style>
 </head>
 
@@ -1215,7 +1277,24 @@
   <header class="wrap nav"><a class="brand" href="#"><span class="logo">F</span> FRAUDEXA</a>
     <nav class="links" id="links"><a href="#checker">Scam Checker</a><a href="#features">Features</a><a
         href="#radar">Scam Radar</a><a href="#rescue">Scam Rescue</a></nav>
-    <div class="navright"><a class="btn ghost" href="login.html">Log in</a><a class="btn primary" href="#checker">Check
+    <div class="navright"><div class="account-menu" id="accountMenu" hidden>
+  <button class="account-trigger" id="accountTrigger" type="button">
+    <span class="account-avatar" id="accountAvatar">U</span>
+    <span id="accountName">My Account</span>
+    <span>⌄</span>
+  </button>
+
+  <div class="account-dropdown" id="accountDropdown" hidden>
+    <strong id="accountFullName">User</strong>
+    <p class="account-email" id="accountEmail"></p>
+    <p>Current Plan: <strong id="accountPlan">Free</strong></p>
+    <button class="account-logout" id="accountLogout" type="button">
+      Log out
+    </button>
+  </div>
+</div>
+
+<a class="btn ghost" id="loginLink" href="login.html">Log in</a><a class="btn primary" href="#checker">Check
         a message ↗</a><button class="menu" id="menu" aria-label="Menu">☰</button></div>
   </header>
   <main>
@@ -1360,10 +1439,11 @@
   <div class="toast" id="toast"></div>
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    // Existing Firebase web-app config. Never place private service-account keys in frontend code.
-    const firebaseConfig = { apiKey: "AIzaSyBNSTDIceQCupazPl4ZbzR4OFN64RVQgTY", authDomain: "fraudexa-15d6a.firebaseapp.com", projectId: "fraudexa-15d6a", storageBucket: "fraudexa-15d6a.firebasestorage.app", messagingSenderId: "891490763035", appId: "1:891490763035:web:15c654ed5946910ecc93be", measurementId: "G-X3K8MDGV7W" };
-    try { const app = initializeApp(firebaseConfig); const auth = getAuth(app); onAuthStateChanged(auth, user => { if (user) { const a = document.querySelector('a[href="login.html"]'); if (a) a.textContent = "My account" } }) } catch (e) { console.warn("Firebase:", e) }
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";   import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  const firebaseConfig = { apiKey: "AIzaSyBNSTDIceQCupazPl4ZbzR4OFN64RVQgTY", authDomain: "fraudexa-15d6a.firebaseapp.com", projectId: "fraudexa-15d6a", storageBucket: "fraudexa-15d6a.firebasestorage.app", messagingSenderId: "891490763035", appId: "1:891490763035:web:15c654ed5946910ecc93be", measurementId: "G-X3K8MDGV7W" };
+    try { const app = initializeApp(firebaseConfig); const auth = getAuth(app); onAu
+      const db = getFirestore(app);
+      thStateChanged(auth, user => { if (user) { const a = document.querySelector('a[href="login.html"]'); if (a) a.textContent = "My account" } }) } catch (e) { console.warn("Firebase:", e) }
     const API = "https://fraudexa.onrender.com"; const $ = id => document.getElementById(id); let mode = "message"; $("year").textContent = new Date().getFullYear();
     $("menu").onclick = () => $("links").classList.toggle("open"); document.querySelectorAll("#links a").forEach(a => a.onclick = () => $("links").classList.remove("open"));
     document.querySelectorAll(".tab").forEach(t => t.onclick = () => { mode = t.dataset.mode; document.querySelectorAll(".tab").forEach(x => x.classList.toggle("active", x === t)); $("messagePanel").hidden = mode !== "message"; $("imagePanel").hidden = mode !== "image"; $("result").classList.remove("show") });
